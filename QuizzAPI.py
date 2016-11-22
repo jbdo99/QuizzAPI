@@ -39,7 +39,7 @@ class Quizz():
             self.reponse.append('{0}'.format(row[0]))
         return reponse
 
-    def question->id(self,question):
+    def question--id(self,question):
         reponse = []
         self.cursor.execute("""SELECT id FROM quizz WHERE question=?""", [question])
         rows = self.cursor.fetchall()
