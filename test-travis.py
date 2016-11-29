@@ -14,6 +14,24 @@
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
 """
 
+import random
 from QuizzAPI import Quizz
 
 qq = Quizz()
+
+for i in range(random.randrange(1,10)):
+    qq.add_quest(str(i),str(i))
+    print ("Q"+i)
+
+
+
+bcl = True
+quest = random.choice(qq.all_question())
+print ("Question : "+str(quest))
+while bcl:
+    rep = input("Reponse : ")
+    if (qq.is_correct(quest,rep)==True):
+        print("Vrai")
+        bcl = False
+    else:
+        print("Faux")
