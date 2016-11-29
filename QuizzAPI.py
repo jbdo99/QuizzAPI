@@ -1,6 +1,6 @@
 """Copyright (C) 2016  Jbdo99
 
-    This prograam is free software: you can redistribute it and/or modify
+    This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
     the Free Software Foundation, either version 3 of the License, or
     (at your option) any later version.
@@ -23,6 +23,16 @@ class Quizz():
         self.cursor.execute("""CREATE TABLE IF NOT EXISTS quizz(id INTEGER PRIMARY KEY AUTOINCREMENT UNIQUE,question TEXT,reponse TEXT)""")
         self.db.commit()
 
+
+    def add_quest(self,quest,rep):
+        try:
+            self.cursor.execute("""INSERT INTO quizz(question,reponse) VALUES(?,?)""", [quest,rep])
+            self.db.commit()
+            return True
+        except:
+            return False
+
+
     def all_question(self):
         reponse = []
         self.cursor.execute("""SELECT question FROM quizz""")
@@ -39,10 +49,36 @@ class Quizz():
             self.reponse.append('{0}'.format(row[0]))
         return reponse
 
-    def question___id(self,question):
+    def question--id(self,question):
         reponse = []
         self.cursor.execute("""SELECT id FROM quizz WHERE question=?""", [question])
         rows = self.cursor.fetchall()
         for row in rows:
             self.reponse.append('{0}'.format(row[0]))
         return reponse
+
+    def question--reponse(self,question):
+        reponse = []
+        self.cursor.execute("""SELECT reponse FROM quizz WHERE question=?""", [question])
+        rows = self.cursor.fetchall()
+        for row in rows:
+            self.reponse.append('{0}'.format(row[0]))
+        return reponse
+
+    def is_correct(self,quest,rep):
+        reponse = []
+        try:
+            int(quest)
+            idh = True 
+        except Exception, e:
+            pass
+        if idh:
+            self.cursor.execute("""SELECT reponse FROM quizz WHERE id=?""", [quest])
+        else:
+            self.cursor.execute("""SELECT reponse FROM quizz WHERE question=?""", [quest])
+        rows = self.cursor.fetchone()
+        if rows == rep:
+            return True
+        else:
+            return False
+
