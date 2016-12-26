@@ -46,7 +46,7 @@ class Quizz():
         self.cursor.execute("""SELECT reponse FROM quizz""")
         rows = self.cursor.fetchall()
         for row in rows:
-            self.reponse.append('{0}'.format(row[0]))
+            reponse.append('{0}'.format(row[0]))
         return reponse
 
     def question_id(self,question):
@@ -78,7 +78,7 @@ class Quizz():
         else:
             self.cursor.execute("""SELECT reponse FROM quizz WHERE question=?""", [quest])
         rows = self.cursor.fetchone()
-        if rows == rep:
+        if str(rows[0]) == rep:
             return True
         else:
             return False
