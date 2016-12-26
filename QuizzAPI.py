@@ -38,7 +38,7 @@ class Quizz():
         self.cursor.execute("""SELECT question FROM quizz""")
         rows = self.cursor.fetchall()
         for row in rows:
-            self.reponse.append('{0}'.format(row[0]))
+            reponse.append('{0}'.format(row[0]))
         return reponse
 
     def all_reponse(self):
@@ -49,7 +49,7 @@ class Quizz():
             self.reponse.append('{0}'.format(row[0]))
         return reponse
 
-    def question--id(self,question):
+    def question_id(self,question):
         reponse = []
         self.cursor.execute("""SELECT id FROM quizz WHERE question=?""", [question])
         rows = self.cursor.fetchall()
@@ -57,7 +57,7 @@ class Quizz():
             self.reponse.append('{0}'.format(row[0]))
         return reponse
 
-    def question--reponse(self,question):
+    def question_reponse(self,question):
         reponse = []
         self.cursor.execute("""SELECT reponse FROM quizz WHERE question=?""", [question])
         rows = self.cursor.fetchall()
@@ -70,7 +70,8 @@ class Quizz():
         try:
             int(quest)
             idh = True 
-        except Exception, e:
+        except:
+            idh=False
             pass
         if idh:
             self.cursor.execute("""SELECT reponse FROM quizz WHERE id=?""", [quest])
